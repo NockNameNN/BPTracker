@@ -1,7 +1,12 @@
 "use client";
 
 import { TrackerProvider } from "@/context/TrackerContext";
+import { SetupsProvider } from "@/context/SetupsContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <TrackerProvider>{children}</TrackerProvider>;
+  return (
+    <TrackerProvider>
+      <SetupsProvider>{children}</SetupsProvider>
+    </TrackerProvider>
+  );
 }

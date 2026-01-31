@@ -19,3 +19,9 @@ export interface TrackerState {
   isVip: boolean;
   lastResetDate: string;
 }
+
+export interface Setup {
+  id: string;
+  name: string;
+  favoriteIds: number[];
+}
