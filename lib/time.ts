@@ -1,7 +1,8 @@
 import { toZonedTime, fromZonedTime } from "date-fns-tz";
-import { startOfDay, addDays, differenceInMilliseconds } from "date-fns";
+import { addDays, differenceInMilliseconds } from "date-fns";
 
 const MSK = "Europe/Moscow";
+const RESET_HOUR_MSK = 7;
 
 export function getNowInMsk(): Date {
   return toZonedTime(new Date(), MSK);
@@ -13,16 +14,31 @@ export function getMskDateString(date: Date): string {
 }
 
 export function getTodayMskKey(): string {
-  return getMskDateString(new Date());
+  const mskNow = getNowInMsk();
+  const y = mskNow.getFullYear();
+  const m = mskNow.getMonth();
+  const d = mskNow.getDate();
+  const h = mskNow.getHours();
+  if (h < RESET_HOUR_MSK) {
+    const prev = new Date(y, m, d - 1);
+    return `${prev.getFullYear()}-${String(prev.getMonth() + 1).padStart(2, "0")}-${String(prev.getDate()).padStart(2, "0")}`;
+  }
+  return `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
 
 export function getNextResetMsk(): Date {
-  const now = new Date();
-  const mskNow = toZonedTime(now, MSK);
-  const startToday = startOfDay(mskNow);
-  const startTodayUtc = fromZonedTime(startToday, MSK);
-  const startTomorrowUtc = addDays(startTodayUtc, 1);
-  return startTomorrowUtc;
+  const mskNow = getNowInMsk();
+  const y = mskNow.getFullYear();
+  const m = mskNow.getMonth();
+  const d = mskNow.getDate();
+  const resetToday = new Date(y, m, d, RESET_HOUR_MSK, 0, 0, 0);
+  const resetTomorrow = addDays(resetToday, 1);
+  const resetTodayUtc = fromZonedTime(resetToday, MSK);
+  const resetTomorrowUtc = fromZonedTime(resetTomorrow, MSK);
+  if (mskNow.getHours() < RESET_HOUR_MSK) {
+    return resetTodayUtc;
+  }
+  return resetTomorrowUtc;
 }
 
 export function getMsUntilNextReset(): number {

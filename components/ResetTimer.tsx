@@ -17,7 +17,7 @@ export function ResetTimer() {
 
   return (
     <div className="rounded-lg bg-amber-950/40 px-4 py-2 text-center font-mono text-amber-200">
-      Сброс через: {formatTimeUntilReset(msLeft)} (00:00 МСК)
+      Сброс через: {formatTimeUntilReset(msLeft)} (07:00 МСК)
     </div>
   );
 }

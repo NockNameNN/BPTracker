@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
+import { PwaRegister } from "@/components/PwaRegister";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +14,54 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://bp-tracker.example.com";
+
+export const viewport: Viewport = {
+  themeColor: "#f59e0b",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
-  title: "BP Tracker — GTA 5 RP Bonus Points",
-  description: "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "BP Tracker — GTA 5 RP Bonus Points",
+    template: "%s | BP Tracker",
+  },
+  description:
+    "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay. Ежедневный сброс в 07:00 МСК.",
+  keywords: [
+    "GTA 5",
+    "GTA RP",
+    "RolePlay",
+    "Bonus Points",
+    "BP",
+    "ежедневные задания",
+    "трекер",
+  ],
+  authors: [{ name: "BP Tracker" }],
+  creator: "BP Tracker",
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: baseUrl,
+    siteName: "BP Tracker",
+    title: "BP Tracker — GTA 5 RP Bonus Points",
+    description: "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BP Tracker — GTA 5 RP Bonus Points",
+    description: "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: baseUrl,
+  },
 };
 
 export default function RootLayout({
@@ -25,10 +71,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="icon" href="/icon.svg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <PwaRegister />
+          {children}
+        </Providers>
       </body>
     </html>
   );

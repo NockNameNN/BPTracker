@@ -1,0 +1,16 @@
+import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://bp-tracker.example.com";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: [],
+    },
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
+}

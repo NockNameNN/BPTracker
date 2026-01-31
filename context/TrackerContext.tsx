@@ -10,6 +10,7 @@ interface TrackerContextValue extends TrackerState {
   toggleFavorite: (id: number) => void;
   setCompletedIds: (ids: number[]) => void;
   toggleCompleted: (id: number) => void;
+  setCompletedCount: (id: number, count: number) => void;
   setIsVip: (v: boolean) => void;
   resetDay: () => void;
 }
@@ -44,6 +45,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       setState((prev) => ({
         ...prev,
         completedIds: [],
+        completedCounts: {},
         lastResetDate: todayKey,
       }));
     }
@@ -55,7 +57,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       const today = getTodayMskKey();
       setState((prev) => {
         if (prev.lastResetDate && prev.lastResetDate !== today) {
-          return { ...prev, completedIds: [], lastResetDate: today };
+          return { ...prev, completedIds: [], completedCounts: {}, lastResetDate: today };
         }
         return prev;
       });
@@ -91,6 +93,17 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
+  const setCompletedCount = useCallback((id: number, count: number) => {
+    setState((prev) => {
+      const n = Math.max(0, Math.floor(count));
+      if (n === 0) {
+        const { [id]: _, ...rest } = prev.completedCounts;
+        return { ...prev, completedCounts: rest };
+      }
+      return { ...prev, completedCounts: { ...prev.completedCounts, [id]: n } };
+    });
+  }, []);
+
   const setIsVip = useCallback((v: boolean) => {
     setState((prev) => ({ ...prev, isVip: v }));
   }, []);
@@ -99,6 +112,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
     setState((prev) => ({
       ...prev,
       completedIds: [],
+      completedCounts: {},
       lastResetDate: todayKey,
     }));
   }, [todayKey]);
@@ -110,6 +124,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       toggleFavorite,
       setCompletedIds,
       toggleCompleted,
+      setCompletedCount,
       setIsVip,
       resetDay,
     }),
@@ -119,6 +134,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       toggleFavorite,
       setCompletedIds,
       toggleCompleted,
+      setCompletedCount,
       setIsVip,
       resetDay,
     ]
