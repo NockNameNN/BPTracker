@@ -220,7 +220,7 @@ export function AllTasksContent() {
                   : "bg-slate-800/80 text-slate-200"
               }`}
             >
-              <div className="flex min-w-0 flex-1 items-center gap-3 sm:min-w-[8rem]">
+              <div className="flex min-w-0 flex-1 items-start gap-3 sm:min-w-[8rem]">
                 <button
                   type="button"
                   onClick={() => toggleFavorite(task.id)}
@@ -229,7 +229,7 @@ export function AllTasksContent() {
                 >
                   <StarIcon filled={isFavorite} />
                 </button>
-                <span className={`min-w-0 flex-1 truncate ${isCompleted ? "line-through" : ""}`}>{task.name}</span>
+                <span className={`min-w-0 flex-1 break-words ${isCompleted ? "line-through" : ""}`}>{task.name}</span>
               </div>
               <div className="flex min-w-0 flex-wrap items-center gap-2 sm:shrink-0">
                 <span className="font-mono text-sm text-amber-400/90">

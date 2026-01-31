@@ -344,7 +344,7 @@ export function DashboardContent() {
                     key={task.id}
                     className="flex flex-col gap-2 rounded-lg bg-slate-800/80 px-4 py-3 transition sm:flex-row sm:flex-wrap sm:items-center sm:gap-3"
                   >
-                    <span className="min-w-0 flex-1 text-slate-200 sm:min-w-[8rem]">{task.name}</span>
+                    <span className="min-w-0 flex-1 break-words text-slate-200 sm:min-w-[8rem]">{task.name}</span>
                     <div className="flex min-w-0 flex-wrap items-center gap-2 sm:shrink-0">
                       {task.category === "Фракционные" && (
                         <span className="rounded bg-violet-600/30 px-1.5 py-0.5 text-xs text-violet-300">
@@ -397,14 +397,14 @@ export function DashboardContent() {
                       : "bg-slate-800/80 text-slate-200"
                   }`}
                 >
-                  <div className="flex min-w-0 flex-1 items-center gap-3 sm:min-w-[8rem]">
+                  <div className="flex min-w-0 flex-1 items-start gap-3 sm:min-w-[8rem]">
                     <input
                       type="checkbox"
                       checked={done}
                       onChange={() => toggleCompleted(task.id)}
-                      className="h-5 w-5 shrink-0 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+                      className="mt-0.5 h-5 w-5 shrink-0 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="min-w-0 flex-1 truncate">{task.name}</span>
+                    <span className="min-w-0 flex-1 break-words">{task.name}</span>
                   </div>
                   <div className="flex min-w-0 flex-wrap items-center gap-2 sm:shrink-0">
                     {task.category === "Фракционные" && (
@@ -458,7 +458,7 @@ export function DashboardContent() {
           onClick={resetDay}
           className="rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 text-sm text-slate-300 transition hover:bg-slate-700 hover:text-white"
         >
-          Сбросить день
+          Сбросить
         </button>
       )}
     </div>

@@ -7,7 +7,7 @@ export function ExtraConditionTag({ text }: { text: string }) {
         Доп. условия
       </span>
       <span
-        className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 max-w-[240px] -translate-x-1/2 rounded bg-slate-800 px-2 py-1.5 text-xs text-slate-200 opacity-0 shadow-lg ring-1 ring-slate-600 transition-opacity group-hover:opacity-100"
+        className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 w-max max-w-[min(360px,90vw)] -translate-x-1/2 whitespace-normal rounded bg-slate-800 px-3 py-2 text-xs text-slate-200 opacity-0 shadow-lg ring-1 ring-slate-600 transition-opacity group-hover:opacity-100"
         role="tooltip"
       >
         {text}
