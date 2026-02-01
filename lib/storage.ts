@@ -2,7 +2,7 @@ import { TrackerState } from "./types";
 
 const KEY = "bp-tracker-state";
 
-const defaultState: TrackerState = {
+export const defaultState: TrackerState = {
   favoriteIds: [],
   completedIds: [],
   completedCounts: {},

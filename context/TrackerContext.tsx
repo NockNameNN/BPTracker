@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { loadState, saveState } from "@/lib/storage";
+import { loadState, saveState, defaultState } from "@/lib/storage";
 import { getTodayMskKey } from "@/lib/time";
 import { TrackerState } from "@/lib/types";
 
@@ -18,7 +18,7 @@ interface TrackerContextValue extends TrackerState {
 const TrackerContext = createContext<TrackerContextValue | null>(null);
 
 export function TrackerProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState<TrackerState>(() => loadState());
+  const [state, setState] = useState<TrackerState>(defaultState);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
