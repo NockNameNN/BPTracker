@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | BP Tracker",
   },
   description:
-    "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay. Ежедневный сброс в 07:00 МСК.",
+    "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   keywords: [
     "GTA 5",
     "GTA RP",
@@ -40,20 +40,18 @@ export const metadata: Metadata = {
     "ежедневные задания",
     "трекер",
   ],
-  authors: [{ name: "BP Tracker" }],
-  creator: "BP Tracker",
   openGraph: {
     type: "website",
     locale: "ru_RU",
     url: baseUrl,
     siteName: "BP Tracker",
     title: "BP Tracker — GTA 5 RP Bonus Points",
-    description: "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay",
+    description: "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   },
   twitter: {
     card: "summary_large_image",
     title: "BP Tracker — GTA 5 RP Bonus Points",
-    description: "Отслеживание ежедневных заданий и Bonus Points в GTA 5 RolePlay",
+    description: "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   },
   robots: {
     index: true,
