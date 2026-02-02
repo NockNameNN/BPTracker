@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { PwaRegister } from "@/components/PwaRegister";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { TelegramWebAppInit } from "@/components/TelegramWebAppInit";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -71,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
+        <script src="https://telegram.org/js/telegram-web-app.js" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
@@ -78,6 +80,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          <TelegramWebAppInit />
           <PwaRegister />
           {children}
           <CookieConsentBanner />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTracker } from "@/context/TrackerContext";
 import { useSetups } from "@/context/SetupsContext";
 import { useFilteredFavorites } from "@/hooks/useFilteredFavorites";
+import { useTelegramWebApp } from "@/hooks/useTelegramWebApp";
 import type { FiltersState } from "./FiltersPanel";
 import { BPSummary } from "./BPSummary";
 import { FiltersPanel } from "./FiltersPanel";
@@ -38,6 +39,7 @@ export function DashboardContent() {
   const [filters, setFilters] = useState<FiltersState>(defaultFilters);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const { isMiniApp } = useTelegramWebApp();
   const updateFilters = useCallback((updates: Partial<FiltersState>) => {
     setFilters((prev) => ({ ...prev, ...updates }));
   }, []);
@@ -73,12 +75,14 @@ export function DashboardContent() {
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-white">Bonus Points</h1>
         <div className="flex items-center gap-2">
-          <Link
-            href="/feedback"
-            className="rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-700 hover:text-white"
-          >
-            Обратная связь
-          </Link>
+          {!isMiniApp && (
+            <Link
+              href="/feedback"
+              className="rounded-lg border border-slate-600 px-4 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-700 hover:text-white"
+            >
+              Обратная связь
+            </Link>
+          )}
           <Link
             href="/all-tasks"
             className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500"
