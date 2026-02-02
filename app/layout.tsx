@@ -28,20 +28,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "БП Гта 5 РП — трекер бонус поинтов (БП)",
-    template: "%s | БП GTA 5 RP",
+    default: "BP Tracker — GTA 5 RP Bonus Points",
+    template: "%s | BP Tracker",
   },
   description:
-    "Трекер бп для GTA 5 RP. Отслеживайте бонус поинты (БП) и ежедневные задания. Бп гта 5 рп, задания на бп.",
+    "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   keywords: [
-    "бп гта 5 рп",
-    "бп гта рп",
-    "гта 5 рп бп",
-    "бонус поинты гта",
-    "трекер бп",
-    "трекер бп гта",
-    "ежедневные задания гта рп",
-    "задания на бп",
     "GTA 5",
     "GTA RP",
     "RolePlay",
@@ -54,14 +46,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_RU",
     url: baseUrl,
-    siteName: "БП Гта 5 РП — трекер",
-    title: "БП Гта 5 РП — трекер бонус поинтов",
-    description: "Трекер бп для GTA 5 RP. Бонус поинты, ежедневные задания. Бп гта 5 рп.",
+    siteName: "BP Tracker",
+    title: "BP Tracker — GTA 5 RP Bonus Points",
+    description: "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   },
   twitter: {
     card: "summary_large_image",
-    title: "БП Гта 5 РП — трекер бонус поинтов",
-    description: "Трекер бп для GTA 5 RP. Ежедневные задания и бонус поинты. Бп гта 5 рп.",
+    title: "BP Tracker — GTA 5 RP Bonus Points",
+    description: "Отслеживание ежедневных заданий для получения Bonus Points в GTA 5 RolePlay",
   },
   robots: {
     index: true,
@@ -69,14 +61,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: baseUrl,
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: "/apple-icon.png",
   },
 };
 
@@ -89,6 +73,8 @@ export default function RootLayout({
     <html lang="ru" suppressHydrationWarning>
       <head>
         <script src="https://telegram.org/js/telegram-web-app.js" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
