@@ -1,23 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FeedbackForm } from "./FeedbackForm";
-import { useTelegramWebApp } from "@/hooks/useTelegramWebApp";
 
 export function FeedbackPageClient() {
-  const router = useRouter();
-  const { isMiniApp } = useTelegramWebApp();
-
-  useEffect(() => {
-    if (isMiniApp) router.replace("/");
-  }, [isMiniApp, router]);
-
-  if (isMiniApp) {
-    return null;
-  }
-
   return (
     <main className="min-h-screen bg-slate-900">
       <div className="mx-auto max-w-lg px-4 py-8">
