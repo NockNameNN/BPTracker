@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { PwaRegister } from "@/components/PwaRegister";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -70,8 +71,8 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link rel="apple-touch-icon" href="/icon.svg" />
-        <link rel="icon" href="/icon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -79,6 +80,7 @@ export default function RootLayout({
         <Providers>
           <PwaRegister />
           {children}
+          <CookieConsentBanner />
         </Providers>
       </body>
     </html>

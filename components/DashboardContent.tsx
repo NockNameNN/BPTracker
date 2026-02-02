@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { useTracker } from "@/context/TrackerContext";
 import { useSetups } from "@/context/SetupsContext";
@@ -57,6 +57,16 @@ export function DashboardContent() {
     completedIds,
     completedCounts
   );
+
+  const tasksToShow = useMemo(() => {
+    const isCompleted = (task: (typeof sortedFavorites)[0]) =>
+      task.repeatable
+        ? (completedCounts[task.id] ?? 0) > 0
+        : completedIds.includes(task.id);
+    const incomplete = sortedFavorites.filter((t) => !isCompleted(t));
+    const completed = sortedFavorites.filter(isCompleted);
+    return [...incomplete, ...completed];
+  }, [sortedFavorites, completedIds, completedCounts]);
 
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-6 px-4 py-6">
@@ -121,7 +131,7 @@ export function DashboardContent() {
             </span>
           </h2>
           <ul className="space-y-2">
-            {sortedFavorites.map((task) => {
+            {tasksToShow.map((task) => {
               const bp = isVip ? task.bpWithVip : task.bpWithoutVip;
               if (task.repeatable) {
                 const count = completedCounts[task.id] ?? 0;
