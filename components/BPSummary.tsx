@@ -5,9 +5,11 @@ interface BPSummaryProps {
   maxBp: number;
   isVip: boolean;
   onVipChange: (v: boolean) => void;
+  isX2Server: boolean;
+  onX2ServerChange: (v: boolean) => void;
 }
 
-export function BPSummary({ totalBp, maxBp, isVip, onVipChange }: BPSummaryProps) {
+export function BPSummary({ totalBp, maxBp, isVip, onVipChange, isX2Server, onX2ServerChange }: BPSummaryProps) {
   return (
     <div className="rounded-xl bg-slate-800/80 p-6 shadow-lg">
       <div className="mb-4 text-center">
@@ -30,15 +32,26 @@ export function BPSummary({ totalBp, maxBp, isVip, onVipChange }: BPSummaryProps
           />
         </div>
       )}
-      <label className="flex cursor-pointer items-center justify-center gap-2">
-        <input
-          type="checkbox"
-          checked={isVip}
-          onChange={(e) => onVipChange(e.target.checked)}
-          className="h-5 w-5 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
-        />
-        <span className="text-slate-200">У меня VIP статус</span>
-      </label>
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <label className="flex cursor-pointer items-center gap-2">
+          <input
+            type="checkbox"
+            checked={isVip}
+            onChange={(e) => onVipChange(e.target.checked)}
+            className="h-5 w-5 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+          />
+          <span className="text-slate-200">VIP</span>
+        </label>
+        <label className="flex cursor-pointer items-center gap-2">
+          <input
+            type="checkbox"
+            checked={isX2Server}
+            onChange={(e) => onX2ServerChange(e.target.checked)}
+            className="h-5 w-5 rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+          />
+          <span className="text-slate-200">Сервер x2</span>
+        </label>
+      </div>
     </div>
   );
 }

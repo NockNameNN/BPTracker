@@ -8,6 +8,7 @@ interface SetupsPanelProps {
   setups: Setup[];
   favoriteIds: number[];
   isVip: boolean;
+  isX2Server: boolean;
   onAddSetup: (name: string, ids: number[]) => void;
   onRemoveSetup: (id: string) => void;
   onApplySetup: (ids: number[]) => void;
@@ -17,6 +18,7 @@ export function SetupsPanel({
   setups,
   favoriteIds,
   isVip,
+  isX2Server,
   onAddSetup,
   onRemoveSetup,
   onApplySetup,
@@ -73,7 +75,7 @@ export function SetupsPanel({
           ) : (
             <ul className="space-y-2">
               {setups.map((setup) => {
-                const setupMaxBp = computeSetupMaxBp(setup.favoriteIds, isVip);
+                const setupMaxBp = computeSetupMaxBp(setup.favoriteIds, isVip, isX2Server);
                 return (
                   <li
                     key={setup.id}

@@ -28,11 +28,13 @@ export function DashboardContent() {
     completedIds,
     completedCounts,
     isVip,
+    isX2Server,
     toggleFavorite,
     toggleCompleted,
     setFavoriteIds,
     setCompletedCount,
     setIsVip,
+    setIsX2Server,
     resetDay,
   } = useTracker();
   const { setups, addSetup, removeSetup } = useSetups();
@@ -56,6 +58,7 @@ export function DashboardContent() {
     filters,
     filters.sortBy,
     isVip,
+    isX2Server,
     completedIds,
     completedCounts
   );
@@ -98,6 +101,8 @@ export function DashboardContent() {
         maxBp={maxBp}
         isVip={isVip}
         onVipChange={setIsVip}
+        isX2Server={isX2Server}
+        onX2ServerChange={setIsX2Server}
       />
 
       <ResetTimer />
@@ -106,6 +111,7 @@ export function DashboardContent() {
         setups={setups}
         favoriteIds={favoriteIds}
         isVip={isVip}
+        isX2Server={isX2Server}
         onAddSetup={addSetup}
         onRemoveSetup={removeSetup}
         onApplySetup={setFavoriteIds}
@@ -137,7 +143,8 @@ export function DashboardContent() {
           </h2>
           <ul className="space-y-2">
             {tasksToShow.map((task) => {
-              const bp = isVip ? task.bpWithVip : task.bpWithoutVip;
+              const baseBp = isVip ? task.bpWithVip : task.bpWithoutVip;
+              const bp = isX2Server ? baseBp * 2 : baseBp;
               if (task.repeatable) {
                 const count = completedCounts[task.id] ?? 0;
                 return (

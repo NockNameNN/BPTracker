@@ -16,11 +16,17 @@ export interface FavoriteFilters {
   difficultyFilter: string;
 }
 
+function taskBp(bpWithoutVip: number, bpWithVip: number, isVip: boolean, isX2Server: boolean): number {
+  const base = isVip ? bpWithVip : bpWithoutVip;
+  return isX2Server ? base * 2 : base;
+}
+
 export function useFilteredFavorites(
   favoriteIds: number[],
   filters: FavoriteFilters,
   sortBy: SortBy,
   isVip: boolean,
+  isX2Server: boolean,
   completedIds: number[],
   completedCounts: Record<number, number>
 ) {
@@ -49,7 +55,7 @@ export function useFilteredFavorites(
     let total = 0;
     let max = 0;
     for (const t of favorites) {
-      const bp = isVip ? t.bpWithVip : t.bpWithoutVip;
+      const bp = taskBp(t.bpWithoutVip, t.bpWithVip, isVip, isX2Server);
       if (t.repeatable) {
         const count = completedCounts[t.id] ?? 0;
         total += count * bp;
@@ -60,7 +66,7 @@ export function useFilteredFavorites(
       }
     }
     return { totalBp: total, maxBp: max };
-  }, [favorites, isVip, completedIds, completedCounts]);
+  }, [favorites, isVip, isX2Server, completedIds, completedCounts]);
 
   const completedCount = useMemo(
     () =>
@@ -91,11 +97,12 @@ export function useFilteredFavorites(
 
 export function computeSetupMaxBp(
   favoriteIds: number[],
-  isVip: boolean
+  isVip: boolean,
+  isX2Server: boolean
 ): number {
   const tasks = getTasksByIds(favoriteIds);
   return tasks.reduce((sum, t) => {
-    const bp = isVip ? t.bpWithVip : t.bpWithoutVip;
+    const bp = taskBp(t.bpWithoutVip, t.bpWithVip, isVip, isX2Server);
     if (t.repeatable && t.maxRepeatCount != null) {
       return sum + t.maxRepeatCount * bp;
     }

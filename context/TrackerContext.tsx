@@ -12,6 +12,7 @@ interface TrackerContextValue extends TrackerState {
   toggleCompleted: (id: number) => void;
   setCompletedCount: (id: number, count: number) => void;
   setIsVip: (v: boolean) => void;
+  setIsX2Server: (v: boolean) => void;
   resetDay: () => void;
 }
 
@@ -108,6 +109,10 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
     setState((prev) => ({ ...prev, isVip: v }));
   }, []);
 
+  const setIsX2Server = useCallback((v: boolean) => {
+    setState((prev) => ({ ...prev, isX2Server: v }));
+  }, []);
+
   const resetDay = useCallback(() => {
     setState((prev) => ({
       ...prev,
@@ -126,6 +131,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       toggleCompleted,
       setCompletedCount,
       setIsVip,
+      setIsX2Server,
       resetDay,
     }),
     [
@@ -136,6 +142,7 @@ export function TrackerProvider({ children }: { children: React.ReactNode }) {
       toggleCompleted,
       setCompletedCount,
       setIsVip,
+      setIsX2Server,
       resetDay,
     ]
   );

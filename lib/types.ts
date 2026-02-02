@@ -17,6 +17,7 @@ export interface TrackerState {
   completedIds: number[];
   completedCounts: Record<number, number>;
   isVip: boolean;
+  isX2Server: boolean;
   lastResetDate: string;
 }
 

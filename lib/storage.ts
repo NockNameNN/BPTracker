@@ -7,6 +7,7 @@ export const defaultState: TrackerState = {
   completedIds: [],
   completedCounts: {},
   isVip: false,
+  isX2Server: false,
   lastResetDate: "",
 };
 
@@ -24,6 +25,7 @@ export function loadState(): TrackerState {
       completedIds: Array.isArray(parsed.completedIds) ? parsed.completedIds : defaultState.completedIds,
       completedCounts,
       isVip: typeof parsed.isVip === "boolean" ? parsed.isVip : defaultState.isVip,
+      isX2Server: typeof parsed.isX2Server === "boolean" ? parsed.isX2Server : defaultState.isX2Server,
       lastResetDate: typeof parsed.lastResetDate === "string" ? parsed.lastResetDate : defaultState.lastResetDate,
     };
   } catch {
