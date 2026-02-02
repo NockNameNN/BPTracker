@@ -7,7 +7,7 @@ export function useTelegramWebApp() {
 
   useEffect(() => {
     const webApp = typeof window !== "undefined" ? window.Telegram?.WebApp : undefined;
-    setIsMiniApp(Boolean(webApp));
+    setIsMiniApp(Boolean(webApp?.initData));
   }, []);
 
   return {
